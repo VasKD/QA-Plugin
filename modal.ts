@@ -1,5 +1,6 @@
 import { App, Modal, Setting, TFile } from 'obsidian';
-import { HfInference } from '@huggingface/inference';
+import { askOpenAI } from 'api/openai';
+
 
 export class qaModal extends Modal {
     // store the user's response in the result variable as a string
@@ -10,16 +11,9 @@ export class qaModal extends Modal {
         this.onSubmit = onSubmit;
     }
 
-  async onOpen() {
-    const hf = new HfInference("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");
-  
-    // get contents of current file open in the vault
-    const TFile = this.app.workspace.getActiveFile();
-    // read the file into variable (wait until it successfuly loads)
-    let fileContent: string = '';
-    if (TFile !== null) {
-        fileContent = await this.app.vault.read(TFile);
-    }
+  async onOpen() {  
+    // create a list containing all markdown files in vault
+    let allMarkdownFiles: TFile[] = this.app.vault.getMarkdownFiles();
  
     const { contentEl } = this;
     
@@ -27,9 +21,9 @@ export class qaModal extends Modal {
     contentEl.createEl('h1', { text: 'QA Plugin' });
 
     // check if markdown file has content
-    if (fileContent == null || fileContent == ""){
+    if (TFile == null){
       const fileError = contentEl.createDiv()
-      fileError.innerHTML = `<p>Please Make Sure Your File Has Content</p>`
+      fileError.innerHTML = `<p>Please Make Sure Your Vualt Has File With Content</p>`
     } else {
       // create a text box named "Enter a Question"
       new Setting(contentEl)
@@ -63,14 +57,8 @@ export class qaModal extends Modal {
               } else {
                 // remove any input errors that may have been present prior
                 inputError.detach();
-                const result = await hf.questionAnswering({
-                  model: 'deepset/roberta-base-squad2',
-                  inputs: {
-                    question: this.result,
-                    context: fileContent
-                  }
-                });
-                displayQuestion.innerHTML = `<p>Question: ${this.result} <br> <br> Answer: ${result.answer}</p>`;
+                const answer = await askOpenAI(this.result).catch(console.error);
+                displayQuestion.innerHTML = `<p>Question: ${this.result} <br> <br> Answer: ${answer}</p>`;
               }
               this.onSubmit(this.result);
           }));
