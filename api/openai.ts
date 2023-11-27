@@ -1,19 +1,13 @@
+import qaPlugin from "main";
 import OpenAI from "openai";
 
-const openai = new OpenAI(
-  { apiKey: process.env.OPENAI_API_KEY, 
-    dangerouslyAllowBrowser: true 
-  });
 
+export async function askOpenAI(question: string, plugin: qaPlugin) {
+  const openai = new OpenAI({ apiKey: plugin.settings.apiKey, dangerouslyAllowBrowser: true});
 
-export async function askOpenAI(question: string) {
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
-      // {
-      //   "role": "system",
-      //   "content": prompt
-      // },
       {
         "role": "user",
         "content": question
@@ -25,6 +19,6 @@ export async function askOpenAI(question: string) {
     frequency_penalty: 0,
     presence_penalty: 0,
   });
+
   return response.choices[0].message.content;
 }
-
