@@ -2,19 +2,22 @@ import { Plugin, Notice } from 'obsidian';
 import { qaModal } from './modal'; 
 import pluginSetting  from './modalSettings';
 
-
+// interface for the settings
 interface MyPluginSettings {
   apiKey: string;
 }
 
+// default settings
 export const  DEFAULT_SETTINGS: MyPluginSettings = {
   apiKey: " ",
 };
 
+// main class
 export default class qaPlugin extends Plugin {
   settings: MyPluginSettings;
   settingsView: pluginSetting;
 
+  // load settings and add ribbon icon
   async onload() {
     await this.loadSettings();
     console.log(this.settings)
@@ -27,7 +30,7 @@ export default class qaPlugin extends Plugin {
     });
   }
 
-
+  // function to load settings from a json file
   async loadSettings() {
     this.settings = Object.assign({}, 
       DEFAULT_SETTINGS, 
@@ -39,6 +42,7 @@ export default class qaPlugin extends Plugin {
     this.saveData(this.settings)
   }
 
+  // function to open the modal
    openModal() {
     // Define the onSubmit function
     const onSubmit = (result: string) => {

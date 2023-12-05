@@ -3,6 +3,7 @@ import { askOpenAI } from 'api/openai';
 import qaPlugin from './main';
 
 
+// this class is used to create the modal
 export class qaModal extends Modal {
     // store the user's response in the result variable as a string
     result: string;
@@ -20,19 +21,14 @@ export class qaModal extends Modal {
     let allMarkdownFiles: TFile[] = this.app.vault.getMarkdownFiles();
 
     const { contentEl } = this;
+
     // create h1 header for title of modal
     contentEl.createEl('h1', { text: 'QA Plugin' });
-    
-    // if (!this.plugin.settings.apiKey) {
-    //   const apiKeyError = contentEl.createDiv(); // create a new p element
-    //   apiKeyError.innerHTML = 'Please supply an API key in the settings.';
-    // }
-    
 
     // check if markdown file has content
     if (TFile == null){
       const fileError = contentEl.createDiv()
-      fileError.innerHTML = `<p>Please Make Sure Your Vualt Has File With Content</p>`
+      fileError.innerHTML = `<p>Please Make Sure Your Vault Has File With Content</p>`
     } else {
       // create a text box named "Enter a Question"
       new Setting(contentEl)
