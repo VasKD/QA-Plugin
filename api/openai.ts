@@ -80,7 +80,7 @@ export async function askOpenAI(question: string, plugin: qaPlugin) {
       messages: [
         {
           "role": "system",
-          "content": prompt4
+          "content": prompt3
         },
         {
           "role": "user",
