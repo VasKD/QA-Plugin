@@ -4,6 +4,7 @@ This is a plugin that utilizes NLP techniques to answer questions a user may hav
 
 
 **Note:** This plugin is not published in the Community Plugins. 
+**Node.js:** Make sure that you have node.js in order to run the commands while installing
 
 
 ## How to install and use
