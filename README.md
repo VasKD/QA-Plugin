@@ -14,8 +14,8 @@ This is a plugin that utilizes NLP techniques to answer questions a user may hav
 
        'obsidian-folder-name'\.obsidian\
 
-3. Create a 'plugin' folder in the .obsidian folder and unzip the repo file within it 
-4. In your terminal, navigate to the plugin folder and run the following commands to install dependencies and build the plugin:
+3. Create a 'plugins' folder in the .obsidian folder and unzip the repo file within it 
+4. In your terminal, navigate to the unziped repo folder (Qa-Plugin-Submission) and run the following commands to install dependencies and build the plugin:
 
         npm install 
         npm run build 
