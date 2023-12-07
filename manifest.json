@@ -3,9 +3,9 @@
 	"name": "QA Plugin",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Kiara Vasquez",
+	"description": "This is a plugin that utilizes NLP techniques to answer questions about the contents of a user's vault.",
+	"author": "Kiara Vasquez, Anushka Chinoy",
 	"authorUrl": "",
 	"fundingUrl": "",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }

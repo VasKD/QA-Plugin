@@ -5,11 +5,13 @@ import pluginSetting  from './modalSettings';
 // interface for the settings
 interface MyPluginSettings {
   apiKey: string;
+  HF_TOKEN: string;
 }
 
 // default settings
 export const  DEFAULT_SETTINGS: MyPluginSettings = {
   apiKey: " ",
+  HF_TOKEN: " ",
 };
 
 // main class
@@ -20,12 +22,11 @@ export default class qaPlugin extends Plugin {
   // load settings and add ribbon icon
   async onload() {
     await this.loadSettings();
-    console.log(this.settings)
     // add instance of settings tab
     this.settingsView = new pluginSetting(this);
     this.addSettingTab(this.settingsView);
     this.addRibbonIcon('search', 'QA Plugin', (evt: MouseEvent) => {
-      new Notice('New QA Feature!!');
+      new Notice('Hello! I\'m SecretaryGPT, your helpful assistant. Ask me a question and I\'ll try to answer it!');
       this.openModal();
     });
   }
@@ -46,7 +47,6 @@ export default class qaPlugin extends Plugin {
    openModal() {
     // Define the onSubmit function
     const onSubmit = (result: string) => {
-      // Do something with the result
       console.log(result);
     };
   
